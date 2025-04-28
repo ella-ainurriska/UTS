@@ -28,4 +28,22 @@ const { width } = Dimensions.get('window')
     require('./../assets/images/gambar/5.jpg'),
   ]
 
+    useEffect(() => {
+    const totalWidth = originalImageList.length * 130
+    const positions = [0, 0, 0]
+
+    const intervals = scrollRefs.map((ref, i) =>
+      setInterval(() => {
+        positions[i] += 1
+        if (positions[i] > totalWidth - width) {
+          positions[i] = 0
+        }
+        scrollRefs[i]?.current?.scrollTo({ x: positions[i], animated: false })
+      }, 20 + i * 10)
+    )
+
+    return () => intervals.forEach(clearInterval)
+  }, [])
+
+
   
