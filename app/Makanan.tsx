@@ -4,6 +4,9 @@ import { View, Text, FlatList, Image, StyleSheet, TouchableOpacity, ScrollView }
 
 export default function Makanan() {
   const [meals, setMeals] = useState([]);
+  const [selectedMeal, setSelectedMeal] = useState<any>(null);
+
+ 
  
   useEffect(() => {
     fetch('https://www.themealdb.com/api/json/v1/1/search.php?s=')
@@ -22,10 +25,29 @@ export default function Makanan() {
     </TouchableOpacity>
   );
 
+  const handleBackToList = () => {
+    setSelectedMeal(null); // Kembali ke daftar makanan
+  };
 
 
   return (
     <View style={styles.container}>
+      {selectedMeal ? ( // Jika ada makanan yang dipilih, tampilkan resep
+        <>
+          <View style={styles.resepContainer}>
+            <Text style={styles.resepTitle}>{selectedMeal.strMeal}</Text>
+            <Image source={{ uri: selectedMeal.strMealThumb }} style={styles.resepImage} />
+            <ScrollView style={{ maxHeight: 200, marginTop: 10 }}>
+              <Text style={styles.resepText}>{selectedMeal.strInstructions}</Text>
+            </ScrollView>
+
+            {/* Tombol kembali dengan panah kiri */}
+            <TouchableOpacity style={styles.backButton} onPress={handleBackToList}>
+              <Icon name="arrow-left" size={20} color="#fff" />
+            </TouchableOpacity>
+          </View>
+        </>
+      ) : (
         <FlatList
           data={meals}
           keyExtractor={(item, index) => index.toString()}
@@ -34,7 +56,7 @@ export default function Makanan() {
           columnWrapperStyle={{ justifyContent: 'space-between' }}
           showsVerticalScrollIndicator={false}
         />
-      
+      )}
     </View>
   );
 }
