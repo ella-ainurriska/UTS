@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useRef, RefObject } from 'react'
 import {
   Text,
   View,
@@ -18,7 +18,7 @@ const shuffle = (arr: any[]) => [...arr].sort(() => Math.random() - 0.5)
 export default function Landing() {
   const router = useRouter(); // ✅ disini tempat yang benar!
 
-  const scrollRefs = [useRef(null), useRef(null), useRef(null)]
+  const scrollRefs = [useRef<ScrollView>(null), useRef(null), useRef(null)]
 
   const originalImageList = [
     require('./../assets/images/gambar/7.jpg'),
