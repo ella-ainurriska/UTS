@@ -1,11 +1,20 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert } from 'react-native';
-
-
+import { useRouter } from 'expo-router'; 
 export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  
+  const router = useRouter(); 
+
+  const handleLogin = () => {
+    if (email === 'ellaainurriska@gmail.com' && password === 'gadismadura') {
+      Alert.alert('Login Berhasil', `Selamat datang, ${email}!`);
+      router.push('/Makanan'); 
+    } else {
+      Alert.alert('Login Gagal', 'Email atau Password salah!');
+    }
+  };
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Login</Text>
