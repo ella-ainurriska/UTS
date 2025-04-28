@@ -1,13 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, FlatList, Image, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
-
+import Icon from 'react-native-vector-icons/FontAwesome'; // Import FontAwesome untuk ikon
 
 export default function Makanan() {
   const [meals, setMeals] = useState([]);
-  const [selectedMeal, setSelectedMeal] = useState<any>(null);
+  const [selectedMeal, setSelectedMeal] = useState<any>(null); // Menyimpan makanan yang dipilih
 
- 
- 
   useEffect(() => {
     fetch('https://www.themealdb.com/api/json/v1/1/search.php?s=')
       .then(response => response.json())
@@ -28,7 +26,6 @@ export default function Makanan() {
   const handleBackToList = () => {
     setSelectedMeal(null); // Kembali ke daftar makanan
   };
-
 
   return (
     <View style={styles.container}>
@@ -81,5 +78,37 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginTop: 8,
   },
-  
+  resepContainer: {
+    marginTop: 20,
+    backgroundColor: '#fff',
+    padding: 15,
+    borderRadius: 15,
+    elevation: 3,
+  },
+  resepTitle: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginBottom: 10,
+    textAlign: 'center',
+  },
+  resepImage: {
+    width: '100%',
+    height: 200,
+    borderRadius: 10,
+  },
+  resepText: {
+    marginTop: 10,
+    fontSize: 14,
+    color: '#333',
+  },
+  backButton: {
+    position: 'absolute',
+    bottom: 0,  
+    left: 5,
+    backgroundColor: '#4CAF50',
+    borderRadius: 40,
+    padding: 10,
+    elevation: 1,
+    marginBottom: 0,
+  },
 });
