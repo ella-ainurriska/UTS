@@ -12,7 +12,7 @@ import Color from '../services/Colors'
 import { useRouter } from 'expo-router'
 
 const { width } = Dimensions.get('window')
-
+const shuffle = (arr: any[]) => [...arr].sort(() => Math.random() - 0.5)
 
   const router = useRouter(); // ✅ disini tempat yang benar!
 
@@ -26,6 +26,12 @@ const { width } = Dimensions.get('window')
     require('./../assets/images/gambar/1.jpg'),
     require('./../assets/images/gambar/4.jpg'),
     require('./../assets/images/gambar/5.jpg'),
+  ]
+
+  const imageRows = [
+    shuffle(originalImageList),
+    shuffle(originalImageList),
+    shuffle(originalImageList),
   ]
 
     useEffect(() => {
